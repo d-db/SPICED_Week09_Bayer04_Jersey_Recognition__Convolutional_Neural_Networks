@@ -1,83 +1,42 @@
-## SPICED Academy - Week 9 - Neural Networks
-
-
-- Build a 'Neural Network' class from scratch (including 'back propagation')
-- Train a CNN to detect five different football jerseys
-- Use the VGG16 pre-trained model to feature extract and categorize two football jerseys
-- Write a program that detects and categorizes football jerseys live on webcam footage
-
-# SPICED_Final_Project_Live_Sign_Language_Translator
+# SPICED Week09: Bayer04 jersey recognition on live footage using a 'Convolutional_Neural_Networks' (Keras)
 
 ## Project Summary
 
-main.py performs a live translation of the German sign language and displays the translated word directly in the window. In the assumed use case, an appointment should be made possible between a deaf and a hearing person. The LSTM neural network is trained to identify 16 different signs of the German sign language. If the user executes the German sign for "stop", a 'speech-to-text' translator will be started. If the user executes the german sign for "end", the programm will end.
+Have you ever wondered which year the Bayer04 vintage jersey in your wardrobe is from? Maybe I can help.
 
-The project has been realised within two weeks and all training data has been solely produced by the author of this project.
+As part of this project, I took between 150 and 200 photos of five different Bayer04 photos and used them to train a 'Convolutional_Neural_Networks' (CNN) using the library 'Keras'. As you can see on the following demonstration video, the programme was subsequently able to classify all six jerseys without errors.
+
+In addition, I trained the pretrained CNN VGG-16 on the two most similar jerseys to test its performance. The user can choose in the script between using the independently trained model or VGG-16.
+
+IMPORTANT: The two models and the photos of the six jerseys in the folder './1_data/' were not uploaded to GitHub because they were too large. So this is only a skeleton that you can use to train and apply your own model.
 
 ## Demonstration Video
 
-https://user-images.githubusercontent.com/61935581/209193653-3dc91bb2-fecc-4960-8581-1e963a9e5aaf.mp4
-
-The English translation of the video content and more details:
-
-- Part 1 (in sign language): "Good morning, I need an appointment."
-(This is followed by the German sign for "Stop", which automatically starts a speech-to-text GUI).
-
-- Part 2 (speech-to-text): "Hello, we have something free on Tuesday at 4pm. If that suits you, please tell me your name. Thank you very much."
-(At this point I have shortened the video by about 7 seconds to speed up the process in the video a bit).
-
-- Part 3 (in sign language): "Thank you my name is Daniel"
-(Then follows the German sign for "end", which ends the whole application)
-
-## Acknowledgement
-
-Many thanks to Nicholas Renotte and [his amazing video about 'action recognition' with Googles MediaPipe library](https://www.youtube.com/watch?v=doDUihpj6ro). Without this important inspiration, the project would not have been possible in this form.
+https://user-images.githubusercontent.com/61935581/209471946-48e37de4-191b-490c-98cf-f49383481eaa.mp4
 
 ## Installation
 
-Clone the repository and create a new virtual environment
+Just clone the repo!
 
-```bash
-python3 -m venv envname # to create the virtual env
-source envname/bin/activate # activate it
-```
-
-Afterwards install the libraries specified in requirements.txt
-
-```bash
-pip install -r requirements.txt
-```
 ## Usage
 
-The project contains three major files:
+The project contains three major components:
 
-### 1. capture.py
+### 1. Take pictures of your objects
 
-The script is used to record new signs. In the standard settings, you go through 200 iterations with 30 frames each (about 1.5 seconds). The gesture is therefore recorded by the user 200 times. The script automatically creates a structure with 200 folders in which the resulting NumPy arrays are stored.
+To take pictures of the objects that the CNN should later distinguish, please use the ['imageclassifier' repo](https://github.com/bonartm/imageclassifier) by user 'bonartm', which is already in the order './take_pictures/'. The repo has its own README.md which explains exactly how to use it.
 
-At the beginning after calling the script, a video of the gesture is recorded once so that the user knows later exactly which gesture it was. The video is stored in the same folder structure like the NumPy arrays.
+As mentioned above, I took between 150 and 200 photos of the five different jerseys and the blank wall. I rotated the jerseys to get shots from all perspectives.
 
-In order to call up the script correctly via the command line, the must also specify the following information:
+### 2. Train the CNN model on the pictures
 
-1. the name of the gesture
-2. the location where the folder structure is to be created
+With the jupyter notebook '2_Image_Recognition.ipynb' you can train the CNN model on your pictures. At the end of the notebook you will find a confusion matrix that gives you an impression of how well the model is performing on the test data.
 
-Example command for a recording of the gesture "Morning" stored in the folder "data".
+If you also want to train the pretrained VGG-16 model on your photos, you can use the jupyter notebook '3_Transfer_Pretrained_Model.ipynb' to do so.
 
-```bash
-python3 capture.py Morgen ./data/
-```
-Sample video of two iterations recording the German sign "Morning" through capture.py:
+### 3. Use the model on live footage
 
-https://user-images.githubusercontent.com/61935581/209201751-f65e546a-52ee-4ac3-95dd-285ae002ce4f.mp4
-
-### 2. train_model.ipynb
-
-With this Jupyter notebook the LSTM neural network can be trained and validated.
-
-### 3. main.ipynb
-
-This script combines all relevant functions, loads the LSTM neural network and executes the sign language translation as well as the 'speech-to-text' translation like seen in the introductory video above.
+Use the script 'image_recognition.py' to perform image recognition on live footage. As it stands, the script asks which model to use for categorisation - the fully self-trained CNN model (option 1) or VGG-16 (option 2).
 
 ## Contributing
 
