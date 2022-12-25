@@ -16,7 +16,18 @@ https://user-images.githubusercontent.com/61935581/209471946-48e37de4-191b-490c-
 
 ## Installation
 
-Just clone the repo!
+Clone the repository and create a new virtual environment
+
+```bash
+python3 -m venv envname # to create the virtual env
+source envname/bin/activate # activate it
+```
+
+Afterwards install the libraries specified in requirements.txt
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Usage
 
